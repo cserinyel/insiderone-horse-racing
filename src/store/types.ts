@@ -49,8 +49,8 @@ export interface Actions {
 }
 
 // Typed store interface
-export interface TypedStore extends Omit<Store<RootState>, "getters" | "dispatch"> {
+export interface TypedStore
+  extends Omit<Store<RootState>, "getters" | "dispatch"> {
   getters: Getters;
   dispatch<K extends keyof Actions>(action: K): Promise<Actions[K]>;
 }
-

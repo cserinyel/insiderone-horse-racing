@@ -5,8 +5,8 @@ import {
   BASE_DISTANCE,
   CONDITION_PUSH_THRESHOLD,
   CONDITION_PUSH_FLOOR,
-} from "../../../utils/constants";
-import type { Horse } from "../../../types/horse";
+} from "../../utils/constants";
+import type { Horse } from "../../types/horse";
 
 export function getPhaseBonus(position: number): number {
   if (position < RACE_PHASES.START.maxPosition)

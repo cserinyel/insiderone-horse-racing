@@ -7,6 +7,7 @@ import HorseLane from "./HorseLane.vue";
 import RaceInfoOverlay from "./RaceInfoOverlay.vue";
 import { ResetRaceButton, GenerateScheduleButton } from "../controls";
 import { RACE_STATE } from "../../../types/race";
+import type { HorseId } from "../../../types/horse";
 
 const {
   currentLap,
@@ -20,7 +21,7 @@ const {
 usePositionUpdater(raceState, updatePositions);
 useVisibilityPause(pauseRace);
 
-const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
+const getPosition = (horseId: HorseId) => horsePositions.value[horseId] || 0;
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import { COUNTDOWN_INTERVAL_MS } from "../../../utils/constants";
+import { COUNTDOWN_INTERVAL_MS } from "../../utils/constants";
 
 let countdownIntervalRef: number | null = null;
 
@@ -26,4 +26,3 @@ export function runCountdownInterval(
     }
   }, COUNTDOWN_INTERVAL_MS);
 }
-

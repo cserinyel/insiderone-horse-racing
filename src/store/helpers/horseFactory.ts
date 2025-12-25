@@ -5,8 +5,8 @@ import {
   HORSE_CONDITION_MAX,
   COLORS,
   RACE_LAP_HORSE_COUNT,
-} from "../../../utils/constants";
-import type { Horse, HorseId } from "../../../types/horse";
+} from "../../utils/constants";
+import type { Horse, HorseId } from "../../types/horse";
 
 export function createRandomHorses(): Horse[] {
   const horses: Horse[] = [];

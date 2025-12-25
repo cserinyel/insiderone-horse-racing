@@ -17,12 +17,12 @@ import {
   type UpdatePositionPayload,
   type SetFinishTimePayload,
 } from "../../types/race";
-import { createRandomHorses, getRandomHorses } from "./helpers/horseFactory";
-import { calculateHorseSpeed } from "./helpers/racePhases";
+import { createRandomHorses, getRandomHorses } from "../helpers/horseFactory";
+import { calculateHorseSpeed } from "../helpers/racePhases";
 import {
   clearCountdownInterval,
   runCountdownInterval,
-} from "./helpers/countdown";
+} from "../helpers/countdown";
 
 interface RaceState {
   horses: Horse[];
