@@ -35,11 +35,6 @@ export interface UpdatePositionPayload {
   horseId: HorseId;
   position: number;
 }
-export interface UpdatePositionPayload {
-  horseId: HorseId;
-  position: number;
-}
-
 export interface SetFinishTimePayload {
   horseId: HorseId;
   finishTime: number;

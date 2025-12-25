@@ -2,19 +2,20 @@
 import { computed } from "vue";
 import HorseIcon from "../common/HorseIcon.vue";
 import { RACE_STATE, type RaceState } from "../../types/race";
+import type { Horse } from "../../types/horse";
+import { FINISH_LINE_POSITION, INITIAL_POSITION } from "../../utils/constants";
 
 const props = defineProps<{
-  horse: {
-    id: string;
-    name: string;
-    color: { hex: string };
-  };
+  horse: Horse;
   laneNumber: number;
   position: number;
   raceState: RaceState;
 }>();
 
-const isMoving = computed(() => props.position > 0 && props.position < 100);
+const isMoving = computed(
+  () =>
+    props.position > INITIAL_POSITION && props.position < FINISH_LINE_POSITION
+);
 </script>
 
 <template>
@@ -126,4 +127,3 @@ const isMoving = computed(() => props.position > 0 && props.position < 100);
   z-index: 1;
 }
 </style>
-

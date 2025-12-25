@@ -123,13 +123,15 @@ export const RACE_LAP_ITEMS = {
   },
 } as const satisfies Record<string, RaceLapItem>;
 
-export const SPEED_MULTIPLIER = 0.3; // Base speed calculation multiplier (increased for faster races)
+export const SPEED_MULTIPLIER = 0.2; // Base speed calculation multiplier (increased for faster races)
 export const VARIATION_RANGE = 0.15; // Random variation range for speed
 export const UPDATE_INTERVAL_MS = 250; // Position update interval in milliseconds
 export const COUNTDOWN_DURATION = 3; // Countdown seconds before race starts
 export const LAP_TRANSITION_DELAY_MS = 300; // Delay for CSS transition to complete before showing results
 export const NEXT_LAP_DELAY_MS = 1000; // Delay before starting next lap
 export const COUNTDOWN_INTERVAL_MS = 1000; // Countdown tick interval
+export const FINISH_LINE_POSITION = 100;
+export const INITIAL_POSITION = 0;
 
 // Distance-based racing: base distance for speed normalization
 export const BASE_DISTANCE = 1200; // Base distance in meters (shortest race)

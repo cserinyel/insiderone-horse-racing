@@ -6,7 +6,7 @@ import {
   COLORS,
   RACE_LAP_HORSE_COUNT,
 } from "../../../utils/constants";
-import type { Horse } from "../../../types/horse";
+import type { Horse, HorseId } from "../../../types/horse";
 
 export function createRandomHorses(): Horse[] {
   const horses: Horse[] = [];
@@ -31,7 +31,7 @@ export function createRandomHorses(): Horse[] {
         Math.random() * (HORSE_CONDITION_MAX - HORSE_CONDITION_MIN + 1)
       ) + HORSE_CONDITION_MIN;
 
-    horses.push({ id: crypto.randomUUID(), name, color, condition });
+    horses.push({ id: crypto.randomUUID() as HorseId, name, color, condition });
   }
 
   return horses;
