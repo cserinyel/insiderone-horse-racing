@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import Button from "../../common/button/Button.vue";
 import { useStore } from "vuex";
 
@@ -10,19 +11,29 @@ const store = useStore();
 const generateRandomRaceSchedule = () => {
   store.dispatch("raceStore/generateRandomRaceSchedule");
 };
+const isRaceScheduleGenerated = computed(
+  () => store.getters["raceStore/isRaceScheduleGenerated"]
+);
 </script>
 
 <template>
   <header class="topbar">
     <h1 class="app-title">{{ title }}</h1>
-    <Button
-      label="Generate Schedule"
-      :onClick="
-        () => {
-          generateRandomRaceSchedule();
-        }
-      "
-    />
+    <div class="race-controls-container">
+      <Button
+        label="Generate Schedule"
+        :onClick="
+          () => {
+            generateRandomRaceSchedule();
+          }
+        "
+      />
+      <Button
+        label="Start Races"
+        :disabled="!isRaceScheduleGenerated"
+        :onClick="() => {}"
+      />
+    </div>
   </header>
 </template>
 
@@ -43,5 +54,9 @@ const generateRandomRaceSchedule = () => {
   font-weight: 600;
   margin: 0;
   color: inherit;
+}
+.race-controls-container {
+  display: flex;
+  gap: 10px;
 }
 </style>

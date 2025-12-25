@@ -45,6 +45,14 @@ const currentLap = computed(() => store.getters["raceStore/getCurrentLap"]);
   flex-direction: column;
   flex: 1;
   gap: 10px;
+  background-color: rgb(65, 65, 65);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+.race-track-header {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
 }
 .race-track-lap-progress-container {
   display: flex;
@@ -60,10 +68,21 @@ const currentLap = computed(() => store.getters["raceStore/getCurrentLap"]);
   justify-content: center;
   gap: 10px;
 }
+.race-track-lane-number {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  width: 20px;
+  text-align: center;
+  color: #000;
+  background-color: rgb(255, 178, 78);
+  border-radius: 8px;
+  padding: 4px 8px;
+}
 .race-track-lane-horse-container {
   display: flex;
   width: 100%;
-  background-color: blue;
+  border-bottom: 1px solid rgb(255, 178, 78);
 }
 .race-track-lap-horse-image {
   width: 50px;

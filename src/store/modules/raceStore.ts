@@ -95,6 +95,7 @@ const raceStore: Module<RaceState, any> = {
     horses: (state) => state.horses,
     horseCount: (state) => state.horses.length,
     raceSchedule: (state) => state.raceSchedule,
+    isRaceScheduleGenerated: (state) => state.raceSchedule.length > 0,
     getCurrentLap: (state) =>
       state.raceSchedule.find((lap) => lap.id === state.currentLapId),
   },
