@@ -6,12 +6,14 @@ import {
   LAP_TRANSITION_DELAY_MS,
   NEXT_LAP_DELAY_MS,
 } from "../../utils/constants";
-import type { Horse } from "../../types/horse";
+import type { Horse, HorseId } from "../../types/horse";
 import {
   type RaceScheduleItem,
   type RaceState as RaceStateType,
   type RaceResult,
   RACE_STATE,
+  type UpdatePositionPayload,
+  type SetFinishTimePayload,
 } from "../../types/race";
 import { createRandomHorses, getRandomHorses } from "./helpers/horseFactory";
 import { calculateHorseSpeed } from "./helpers/racePhases";
@@ -25,8 +27,8 @@ interface RaceState {
   raceSchedule: RaceScheduleItem[];
   raceState: RaceStateType;
   currentLapIndex: number;
-  horsePositions: Record<string, number>;
-  finishTimes: Record<string, number>;
+  horsePositions: Record<HorseId, number>;
+  finishTimes: Record<HorseId, number>;
   countdownValue: number;
   raceStartTime: number;
   lapResults: RaceResult[][];
@@ -60,16 +62,10 @@ const raceStore: Module<RaceState, unknown> = {
     SET_CURRENT_LAP_INDEX(state, index: number) {
       state.currentLapIndex = index;
     },
-    UPDATE_HORSE_POSITION(
-      state,
-      { horseId, position }: { horseId: string; position: number }
-    ) {
+    UPDATE_HORSE_POSITION(state, { horseId, position }: UpdatePositionPayload) {
       state.horsePositions[horseId] = position;
     },
-    SET_FINISH_TIME(
-      state,
-      { horseId, finishTime }: { horseId: string; finishTime: number }
-    ) {
+    SET_FINISH_TIME(state, { horseId, finishTime }: SetFinishTimePayload) {
       state.finishTimes[horseId] = finishTime;
     },
     SET_COUNTDOWN_VALUE(state, value: number) {

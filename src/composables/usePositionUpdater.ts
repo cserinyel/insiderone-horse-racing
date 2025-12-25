@@ -1,10 +1,10 @@
 import { watch, onUnmounted } from "vue";
 import type { ComputedRef } from "vue";
 import { UPDATE_INTERVAL_MS } from "../utils/constants";
-import { RACE_STATE } from "../types/race";
+import { RACE_STATE, type RaceState } from "../types/race";
 
 export function usePositionUpdater(
-  raceState: ComputedRef<string>,
+  raceState: ComputedRef<RaceState>,
   onUpdate: () => void
 ) {
   let intervalRef: number | null = null;
@@ -37,4 +37,3 @@ export function usePositionUpdater(
 
   return { start, stop };
 }
-

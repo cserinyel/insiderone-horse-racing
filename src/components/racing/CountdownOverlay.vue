@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { RACE_STATE } from "../../types/race";
+import { RACE_STATE, type RaceState } from "../../types/race";
 
 defineProps<{
-  raceState: string;
+  raceState: RaceState;
   countdownValue: number;
   lapName: string;
 }>();
@@ -70,4 +70,3 @@ defineProps<{
   margin: 0;
 }
 </style>
-

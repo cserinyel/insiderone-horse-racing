@@ -90,7 +90,7 @@ export const COLORS = [
 export const HORSE_CONDITION_MIN = 1;
 export const HORSE_CONDITION_MAX = 100;
 export const RACE_LAP_HORSE_COUNT = 10;
-export const RACE_LAP_ITEMS: Record<string, RaceLapItem> = {
+export const RACE_LAP_ITEMS = {
   FIRST_LAP: {
     lapNumber: 1,
     lapDistance: 1200,
@@ -121,7 +121,7 @@ export const RACE_LAP_ITEMS: Record<string, RaceLapItem> = {
     lapDistance: 2200,
     lapName: "Sixth Lap",
   },
-};
+} as const satisfies Record<string, RaceLapItem>;
 
 export const SPEED_MULTIPLIER = 0.3; // Base speed calculation multiplier (increased for faster races)
 export const VARIATION_RANGE = 0.15; // Random variation range for speed

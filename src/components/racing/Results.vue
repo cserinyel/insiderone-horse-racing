@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
+import type { RaceResult, ResultWithLapInfo } from "../../types/race";
 
 const store = useStore();
 const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
 const lapResults = computed(() => store.getters["raceStore/lapResults"]);
 
-const resultsWithLapInfo = computed(() => {
-  return lapResults.value.map((results, index) => {
+const resultsWithLapInfo = computed<ResultWithLapInfo[]>(() => {
+  return lapResults.value.map((results: RaceResult[], index: number) => {
     const lapInfo = raceSchedule.value[index];
     return {
       lapInfo,

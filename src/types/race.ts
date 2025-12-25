@@ -1,4 +1,4 @@
-import type { Horse } from "./horse";
+import type { Horse, HorseId } from "./horse";
 
 export interface RaceLapItem {
   lapNumber: number;
@@ -8,7 +8,7 @@ export interface RaceLapItem {
 
 export interface RaceScheduleItem extends RaceLapItem {
   id: string;
-  horses: Record<number, Horse>;
+  horses: Horse[];
 }
 
 export interface RaceResult {
@@ -26,3 +26,21 @@ export const RACE_STATE = {
 } as const;
 
 export type RaceState = (typeof RACE_STATE)[keyof typeof RACE_STATE];
+
+export interface ResultWithLapInfo {
+  lapInfo: RaceScheduleItem | undefined;
+  results: RaceResult[];
+}
+export interface UpdatePositionPayload {
+  horseId: HorseId;
+  position: number;
+}
+export interface UpdatePositionPayload {
+  horseId: HorseId;
+  position: number;
+}
+
+export interface SetFinishTimePayload {
+  horseId: HorseId;
+  finishTime: number;
+}

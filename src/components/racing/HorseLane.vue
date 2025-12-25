@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import HorseIcon from "../common/HorseIcon.vue";
-import { RACE_STATE } from "../../types/race";
+import { RACE_STATE, type RaceState } from "../../types/race";
 
 const props = defineProps<{
   horse: {
@@ -11,7 +11,7 @@ const props = defineProps<{
   };
   laneNumber: number;
   position: number;
-  raceState: string;
+  raceState: RaceState;
 }>();
 
 const isMoving = computed(() => props.position > 0 && props.position < 100);

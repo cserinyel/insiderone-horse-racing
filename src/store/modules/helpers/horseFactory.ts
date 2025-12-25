@@ -40,8 +40,7 @@ export function createRandomHorses(): Horse[] {
 export function getRandomHorses(
   horses: Horse[],
   count: number = RACE_LAP_HORSE_COUNT
-): Record<number, Horse> {
-  const shuffled = [...horses].sort(() => Math.random() - 0.5).slice(0, count);
-  return Object.fromEntries(shuffled.map((horse, i) => [i, horse]));
+): Horse[] {
+  const shuffled = [...horses].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
 }
-
