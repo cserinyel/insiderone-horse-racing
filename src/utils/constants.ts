@@ -55,36 +55,53 @@ export const HORSE_NAMES = [
 ];
 
 export const COLORS = [
-  { name: "Crimson Red", hex: "#DC143C" },
-  { name: "Scarlet", hex: "#FF2400" },
-  { name: "Coral", hex: "#FF7F50" },
-  { name: "Sunset Orange", hex: "#FF4500" },
-  { name: "Golden Yellow", hex: "#FFD700" },
-  { name: "Mustard", hex: "#E1AD01" },
-  { name: "Lime Green", hex: "#32CD32" },
-  { name: "Forest Green", hex: "#228B22" },
-  { name: "Emerald", hex: "#50C878" },
-  { name: "Teal", hex: "#008080" },
-  { name: "Turquoise", hex: "#40E0D0" },
-  { name: "Sky Blue", hex: "#87CEEB" },
-  { name: "Azure", hex: "#007FFF" },
+  // Reds & Oranges
+  { name: "Crimson Red", hex: "#E63946" },
+  { name: "Fire Engine Red", hex: "#CC0000" },
+  { name: "Signal Orange", hex: "#FF7A00" },
+  { name: "Tangerine", hex: "#FF9E1B" },
+  { name: "Amber Glow", hex: "#FFB000" },
+
+  // Yellows & Golds (bright but not glaring)
+  { name: "Sunshine Yellow", hex: "#FFE11A" },
+  { name: "Goldenrod", hex: "#FFCC33" },
+
+  // Blues (clear & vibrant)
+  { name: "Sky Blue", hex: "#49A7FF" },
+  { name: "Cerulean", hex: "#2FA4E7" },
+  { name: "Azure Blue", hex: "#007BFF" },
   { name: "Royal Blue", hex: "#4169E1" },
-  { name: "Navy Blue", hex: "#000080" },
-  { name: "Indigo", hex: "#4B0082" },
-  { name: "Violet", hex: "#8A2BE2" },
-  { name: "Magenta", hex: "#FF00FF" },
-  { name: "Hot Pink", hex: "#FF69B4" },
-  { name: "Rose", hex: "#FF007F" },
-  { name: "Chocolate Brown", hex: "#8B4513" },
-  { name: "Saddle Brown", hex: "#8B3E2F" },
-  { name: "Olive", hex: "#808000" },
-  { name: "Charcoal", hex: "#36454F" },
-  { name: "Slate Gray", hex: "#708090" },
-  { name: "Silver", hex: "#C0C0C0" },
-  { name: "Mint", hex: "#98FF98" },
-  { name: "Lavender", hex: "#E6E6FA" },
-  { name: "Peach", hex: "#FFDAB9" },
-  { name: "Ivory", hex: "#FFFFF0" },
+  { name: "Indigo Blue", hex: "#3455DB" },
+
+  // Cyans & Aquas
+  { name: "Bright Cyan", hex: "#19C3FF" },
+  { name: "Electric Aqua", hex: "#00E5FF" },
+  { name: "Turquoise", hex: "#1DD2A3" },
+
+  // Purples & Magentas
+  { name: "Electric Purple", hex: "#9B5DE5" },
+  { name: "Vivid Violet", hex: "#8A2BE2" },
+  { name: "Royal Magenta", hex: "#D000FF" },
+  { name: "Fuchsia Punch", hex: "#FF2ED1" },
+  { name: "Hot Pink", hex: "#FF5EBB" },
+
+  // Greens (chosen to contrast well on dark)
+  { name: "Neon Green", hex: "#39FF14" },
+  { name: "Lime Glow", hex: "#A7F432" },
+  { name: "Emerald Flash", hex: "#2ECC71" },
+
+  // Browns / Earth tones (still bright enough)
+  { name: "Copper", hex: "#D2691E" },
+  { name: "Desert Sand", hex: "#E3A857" },
+
+  // Light Neutrals (excellent pop on dark UI)
+  { name: "Warm White", hex: "#FFF7E6" },
+  { name: "Soft Ivory", hex: "#FFF2CC" },
+  { name: "Platinum", hex: "#E5E5E5" },
+
+  // Bold Darks (for accent use, still readable)
+  { name: "Cobalt Night", hex: "#4F5DFF" },
+  { name: "Crimson Night", hex: "#FF3B5C" },
 ];
 
 export const HORSE_CONDITION_MIN = 1;

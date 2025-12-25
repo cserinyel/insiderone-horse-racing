@@ -83,9 +83,8 @@ const isButtonDisabled = computed(() => {
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  background-color: rgba(26, 26, 26, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--header-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .app-title {

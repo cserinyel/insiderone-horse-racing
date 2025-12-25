@@ -1,17 +1,23 @@
 :root {
+  --background-color: #12141B;
+  --header-color: #0e0d12;
+  --track-color: #1A1C22;
+  --track-color-odd: #20222D;
+  --accent-color: #ff7a00;
+  --border-color: #37394e;
+  --text-color: #f3f3f3;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: rgb(36, 36, 36);
+  color: var(--text-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
 body {
   margin: 0;

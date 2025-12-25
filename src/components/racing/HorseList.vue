@@ -39,8 +39,10 @@ const horses = computed(() => store.getters["raceStore/horses"]);
   flex-direction: column;
   gap: 10px;
   width: 400px;
-  height: 100%;
   overflow: hidden;
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 8px;
 }
 .horse-list-table-container {
   height: 100%;
@@ -49,7 +51,6 @@ const horses = computed(() => store.getters["raceStore/horses"]);
 .horse-list-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #000;
 }
 .horse-list-header {
   font-size: 24px;
@@ -58,7 +59,6 @@ const horses = computed(() => store.getters["raceStore/horses"]);
 }
 .horse-list-table th,
 .horse-list-table td {
-  border: 1px solid #000;
   padding: 8px;
   text-align: center;
   white-space: nowrap;
@@ -69,16 +69,17 @@ const horses = computed(() => store.getters["raceStore/horses"]);
   z-index: 1;
 }
 .horse-list-table th {
-  background-color: #000;
-  color: #fff;
+  color: var(--text-color);
   font-weight: 600;
   font-size: 1em;
+  background-color: var(--header-color);
+  box-shadow: inset 0 -1px 0 var(--border-color);
 }
 .horse-list-table th.horse-name-header,
 .horse-list-table td.horse-name {
   text-align: left;
 }
 .horse-list-table tbody tr:nth-child(even) {
-  background-color: rgb(47, 47, 47);
+  background-color: var(--track-color);
 }
 </style>

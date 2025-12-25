@@ -62,7 +62,7 @@ const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
   flex-direction: column;
   flex: 1;
   gap: 10px;
-  background-color: rgb(65, 65, 65);
+  border: 1px solid var(--border-color);
   padding: 8px 16px;
   border-radius: 8px;
   position: relative;
@@ -80,7 +80,7 @@ const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
   font-size: 16px;
   font-weight: 600;
   margin: 0;
-  color: white;
+  color: var(--text-color);
 }
 
 .race-track-header {
@@ -91,16 +91,19 @@ const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
 
 .race-track-lap-container {
   position: relative;
+  height: 100%;
 }
 
 .race-track-lap-horses-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .no-lap {
-  color: #888;
+  color: var(--text-color);
   font-style: italic;
   margin: 0;
+  opacity: 0.5;
 }
 </style>

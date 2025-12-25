@@ -12,6 +12,8 @@ const props = defineProps<{
   raceState: RaceState;
 }>();
 
+const isOddLane = computed(() => props.laneNumber % 2 === 0);
+
 const isMoving = computed(
   () =>
     props.position > INITIAL_POSITION && props.position < FINISH_LINE_POSITION
@@ -21,7 +23,10 @@ const isMoving = computed(
 <template>
   <div class="race-track-lane-container">
     <p class="race-track-lane-number">{{ laneNumber }}</p>
-    <div class="race-track-lane-horse-container">
+    <div
+      class="race-track-lane-horse-container"
+      :class="{ 'odd-lane': isOddLane }"
+    >
       <div
         class="race-track-lane-horse"
         :class="{
@@ -35,9 +40,9 @@ const isMoving = computed(
       >
         <HorseIcon :color="horse.color.hex" />
       </div>
+      <span class="horse-name">{{ horse.name }}</span>
       <div class="finish-line"></div>
     </div>
-    <span class="horse-name">{{ horse.name }}</span>
   </div>
 </template>
 
@@ -47,35 +52,42 @@ const isMoving = computed(
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 8px;
   position: relative;
+  gap: 8px;
+  height: 100%;
 }
-
+.race-track-lane-horse-container {
+  background-color: var(--track-color);
+  height: 100%;
+}
+.race-track-lane-horse-container.odd-lane {
+  background-color: var(--track-color-odd);
+}
 .race-track-lane-number {
   font-size: 16px;
   font-weight: 600;
   margin: 0;
   width: 20px;
   text-align: center;
-  color: #000;
-  background-color: rgb(255, 178, 78);
-  border-radius: 8px;
+  color: var(--accent-color);
   padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .race-track-lane-horse-container {
   display: flex;
   width: 100%;
-  border-bottom: 1px solid rgb(255, 178, 78);
-  position: relative;
-  height: 60px;
+  height: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .race-track-lane-horse {
   display: flex;
   align-items: center;
-  position: absolute;
+  position: relative;
   z-index: 2;
   transition: none;
 }
@@ -105,16 +117,14 @@ const isMoving = computed(
 }
 
 .horse-name {
-  font-size: 12px;
-  color: white;
-  opacity: 0.5;
-  padding: 2px 6px;
+  font-size: 1.5em;
+  color: var(--text-color);
+  opacity: 0.2;
+  padding: 4px 8px;
+  margin-right: 3rem;
   white-space: nowrap;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 3;
+  position: relative;
+  z-index: 1;
 }
 
 .finish-line {
@@ -122,8 +132,19 @@ const isMoving = computed(
   right: 0;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background-color: rgb(255, 178, 78);
+  width: 18px;
+  background-color: var(--accent-color);
+  background-image: linear-gradient(
+      45deg,
+      var(--track-color-odd) 25%,
+      transparent 25%
+    ),
+    linear-gradient(-45deg, var(--track-color-odd) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--track-color-odd) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--track-color-odd) 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
   z-index: 1;
+  opacity: 0.2;
 }
 </style>
