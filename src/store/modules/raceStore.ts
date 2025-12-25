@@ -113,6 +113,7 @@ const raceStore: Module<RaceState, unknown> = {
       }));
 
       commit("SET_RACE_SCHEDULE", raceSchedule);
+      commit("SET_CURRENT_LAP_INDEX", 0);
     },
 
     startRace({ commit, dispatch, state }) {

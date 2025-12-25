@@ -53,8 +53,6 @@ export const HORSE_NAMES = [
   "Regina Solaris",
   "Equus Mirabilis",
 ];
-export const HORSE_CONDITION_MIN = 50;
-export const HORSE_CONDITION_MAX = 100;
 
 export const COLORS = [
   { name: "Crimson Red", hex: "#DC143C" },
@@ -89,6 +87,8 @@ export const COLORS = [
   { name: "Ivory", hex: "#FFFFF0" },
 ];
 
+export const HORSE_CONDITION_MIN = 1;
+export const HORSE_CONDITION_MAX = 100;
 export const RACE_LAP_HORSE_COUNT = 10;
 export const RACE_LAP_ITEMS: Record<string, RaceLapItem> = {
   FIRST_LAP: {
@@ -124,7 +124,7 @@ export const RACE_LAP_ITEMS: Record<string, RaceLapItem> = {
 };
 
 export const SPEED_MULTIPLIER = 0.3; // Base speed calculation multiplier (increased for faster races)
-export const VARIATION_RANGE = 0.12; // Random variation range for speed (±0.06)
+export const VARIATION_RANGE = 0.15; // Random variation range for speed
 export const UPDATE_INTERVAL_MS = 250; // Position update interval in milliseconds
 export const COUNTDOWN_DURATION = 3; // Countdown seconds before race starts
 export const LAP_TRANSITION_DELAY_MS = 300; // Delay for CSS transition to complete before showing results
@@ -140,3 +140,9 @@ export const RACE_PHASES = {
   CRUISE: { maxPosition: 75, speedBonus: 0 }, // 15-75%: steady pace, conserve energy
   SPRINT: { maxPosition: 100, speedBonus: 0.12 }, // 75-100%: final sprint to the finish
 } as const;
+/**
+ * Condition push for slow horses - helps low-condition horses finish faster
+ * but they cannot pass horses with conditions above the threshold
+ */
+export const CONDITION_PUSH_THRESHOLD = 50; // Horses below this get their condition boosted
+export const CONDITION_PUSH_FLOOR = 45; // Minimum effective condition for boosted horses
