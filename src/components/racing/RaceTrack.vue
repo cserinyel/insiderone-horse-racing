@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useRaceState } from "../../composables/useRaceState";
 import { usePositionUpdater } from "../../composables/usePositionUpdater";
 import { useVisibilityPause } from "../../composables/useVisibilityPause";
 import CountdownOverlay from "./CountdownOverlay.vue";
 import HorseLane from "./HorseLane.vue";
 import { RACE_STATE } from "../../types/race";
+import type { Horse } from "../../types/horse";
 
 const {
   currentLap,
@@ -18,7 +20,15 @@ const {
 usePositionUpdater(raceState, updatePositions);
 useVisibilityPause(pauseRace);
 
-const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
+// Memoize position map for current lap horses
+const horsePositionMap = computed(() => {
+  if (!currentLap.value) return {};
+  const map: Record<string, number> = {};
+  currentLap.value.horses.forEach((horse: Horse) => {
+    map[horse.id] = horsePositions.value[horse.id] || 0;
+  });
+  return map;
+});
 </script>
 
 <template>
@@ -48,7 +58,7 @@ const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
           :key="horse.id"
           :horse="horse"
           :lane-number="Number(index) + 1"
-          :position="getPosition(horse.id)"
+          :position="horsePositionMap[horse.id] || 0"
           :race-state="raceState"
         />
       </div>

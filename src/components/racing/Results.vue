@@ -14,6 +14,7 @@ const resultsWithLapInfo = computed<ResultWithLapInfo[]>(() => {
     return {
       lapInfo,
       results,
+      key: lapInfo?.id || `lap-${index}`,
     };
   });
 });
@@ -25,8 +26,8 @@ const resultsWithLapInfo = computed<ResultWithLapInfo[]>(() => {
     <p v-if="!lapResults.length" class="no-results">No results available</p>
     <div v-else class="results-list-container">
       <LapPositionList
-        v-for="(resultData, index) in resultsWithLapInfo"
-        :key="index"
+        v-for="resultData in resultsWithLapInfo"
+        :key="resultData.key"
         :lapName="resultData.lapInfo?.lapName ?? ''"
         :lapDistance="resultData.lapInfo?.lapDistance ?? 0"
         :results="resultData.results"

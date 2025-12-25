@@ -81,8 +81,17 @@ const raceStore: Module<RaceState, RootState> = {
     UPDATE_HORSE_POSITION(state, { horseId, position }: UpdatePositionPayload) {
       state.horsePositions[horseId] = position;
     },
+    // Batched position update - single reactivity trigger for all horses
+    UPDATE_ALL_POSITIONS(state, positions: Record<HorseId, number>) {
+      // Update in-place instead of creating new object
+      Object.assign(state.horsePositions, positions);
+    },
     SET_FINISH_TIME(state, { horseId, finishTime }: SetFinishTimePayload) {
       state.finishTimes[horseId] = finishTime;
+    },
+    SET_ALL_FINISH_TIMES(state, finishTimes: Record<HorseId, number>) {
+      // Update in-place instead of creating new object
+      Object.assign(state.finishTimes, finishTimes);
     },
     SET_COUNTDOWN_VALUE(state, value: number) {
       state.countdownValue = value;
@@ -199,9 +208,12 @@ const raceStore: Module<RaceState, RootState> = {
         commit("SET_COUNTDOWN_VALUE", COUNTDOWN_DURATION);
         commit("CLEAR_FINISH_TIMES");
 
+        // Batch reset all horse positions to 0
+        const initialPositions: Record<HorseId, number> = {};
         currentLap.horses.forEach((horse) => {
-          commit("UPDATE_HORSE_POSITION", { horseId: horse.id, position: 0 });
+          initialPositions[horse.id] = 0;
         });
+        commit("UPDATE_ALL_POSITIONS", initialPositions);
 
         runCountdownInterval(commit, dispatch, () => state.countdownValue);
       } catch (error) {
@@ -224,9 +236,12 @@ const raceStore: Module<RaceState, RootState> = {
         commit("CLEAR_FINISH_TIMES");
         commit("SET_IS_FINISHING_LAP", false);
 
+        // Batch reset all horse positions to 0
+        const initialPositions: Record<HorseId, number> = {};
         currentLap.horses.forEach((horse) => {
-          commit("UPDATE_HORSE_POSITION", { horseId: horse.id, position: 0 });
+          initialPositions[horse.id] = 0;
         });
+        commit("UPDATE_ALL_POSITIONS", initialPositions);
       } catch (error) {
         console.error("Error starting lap:", error);
         clearCountdownInterval();
@@ -245,6 +260,10 @@ const raceStore: Module<RaceState, RootState> = {
         const elapsedSeconds = (Date.now() - state.raceStartTime) / 1000;
         const timeDelta = UPDATE_INTERVAL_MS / 1000;
 
+        // Batch all position and finish time updates
+        const newPositions: Record<HorseId, number> = {};
+        const newFinishTimes: Record<HorseId, number> = {};
+
         horses.forEach((horse) => {
           if (state.finishTimes[horse.id]) return;
 
@@ -260,21 +279,23 @@ const raceStore: Module<RaceState, RootState> = {
             FINISH_LINE_POSITION,
             currentPosition + speed * timeDelta
           );
-          commit("UPDATE_HORSE_POSITION", {
-            horseId: horse.id,
-            position: newPosition,
-          });
+          newPositions[horse.id] = newPosition;
 
           if (newPosition >= FINISH_LINE_POSITION) {
-            commit("SET_FINISH_TIME", {
-              horseId: horse.id,
-              finishTime: elapsedSeconds,
-            });
+            newFinishTimes[horse.id] = elapsedSeconds;
           }
         });
 
+        if (Object.keys(newPositions).length > 0) {
+          commit("UPDATE_ALL_POSITIONS", newPositions);
+        }
+
+        if (Object.keys(newFinishTimes).length > 0) {
+          commit("SET_ALL_FINISH_TIMES", newFinishTimes);
+        }
+
         const allFinished = horses.every(
-          (horse) => state.finishTimes[horse.id]
+          (horse) => state.finishTimes[horse.id] || newFinishTimes[horse.id]
         );
         if (allFinished && !state.isFinishingLap) {
           commit("SET_IS_FINISHING_LAP", true);

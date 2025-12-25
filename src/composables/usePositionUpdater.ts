@@ -25,13 +25,18 @@ export function usePositionUpdater(
     }
   };
 
-  watch(raceState, (state) => {
-    if (state === RACE_STATE.RUNNING) {
-      start();
-    } else {
-      stop();
-    }
-  });
+  // Optimize watch with immediate option and better condition check
+  watch(
+    raceState,
+    (newState) => {
+      if (newState === RACE_STATE.RUNNING) {
+        start();
+      } else {
+        stop();
+      }
+    },
+    { immediate: true } // Start immediately if already running
+  );
 
   onUnmounted(stop);
 

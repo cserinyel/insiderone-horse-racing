@@ -30,6 +30,7 @@ export type RaceState = (typeof RACE_STATE)[keyof typeof RACE_STATE];
 export interface ResultWithLapInfo {
   lapInfo: RaceScheduleItem | undefined;
   results: RaceResult[];
+  key: string;
 }
 export interface UpdatePositionPayload {
   horseId: HorseId;
