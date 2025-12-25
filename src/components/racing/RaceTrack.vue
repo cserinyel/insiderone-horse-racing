@@ -61,7 +61,7 @@ const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 10px;
+  gap: 16px;
   border: 1px solid var(--border-color);
   padding: 8px 16px;
   border-radius: 8px;

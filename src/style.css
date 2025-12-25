@@ -1,14 +1,17 @@
 :root {
-  --background-color: #12141B;
+  --background-color: #12141b;
   --header-color: #0e0d12;
-  --track-color: #1A1C22;
-  --track-color-odd: #20222D;
-  --accent-color: #ff7a00;
+  --track-color: #1a1c22;
+  --track-color-odd: #20222d;
+  --accent-color: #376dff;
+  --accent-color-hover: #2e5fd1;
   --border-color: #37394e;
   --text-color: #f3f3f3;
+  --text-color-dark: #1f1f1f;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 14px;
 
   color-scheme: light dark;
   color: var(--text-color);
@@ -18,11 +21,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-size: 14px;
 }
 
 #app {

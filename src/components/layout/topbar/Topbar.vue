@@ -3,10 +3,7 @@ import { computed } from "vue";
 import Button from "../../common/button/Button.vue";
 import { useStore } from "vuex";
 import { RACE_STATE } from "../../../types/race";
-
-defineProps<{
-  title: string;
-}>();
+import logoSvg from "../../../assets/logo.svg";
 
 const store = useStore();
 const generateRandomRaceSchedule = () => {
@@ -63,9 +60,9 @@ const isButtonDisabled = computed(() => {
 
 <template>
   <header class="topbar">
-    <h1 class="app-title">{{ title }}</h1>
+    <img :src="logoSvg" alt="Horse Racing" class="app-logo" />
     <div class="race-controls-container">
-      <Button label="Reset Race" :onClick="resetRace" />
+      <Button label="Reset Race" :onClick="resetRace" variant="border" />
       <Button label="Generate Schedule" :onClick="generateRandomRaceSchedule" />
       <Button
         :label="getButtonLabel"
@@ -82,16 +79,14 @@ const isButtonDisabled = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 16px;
   background-color: var(--header-color);
   border-bottom: 1px solid var(--border-color);
 }
 
-.app-title {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin: 0;
-  color: inherit;
+.app-logo {
+  height: 40px;
+  width: auto;
 }
 .race-controls-container {
   display: flex;

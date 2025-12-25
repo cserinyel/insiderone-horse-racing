@@ -28,9 +28,9 @@ import Results from "./components/racing/Results.vue";
 .content-area {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem;
+  padding: 16px;
   overflow-x: hidden;
   display: flex;
-  gap: 2rem;
+  gap: 16px;
 }
 </style>

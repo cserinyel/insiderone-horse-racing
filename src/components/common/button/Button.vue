@@ -1,35 +1,60 @@
 <script setup lang="ts">
-defineProps<{
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-}>();
+withDefaults(
+  defineProps<{
+    label: string;
+    onClick: () => void;
+    variant?: "primary" | "border";
+    disabled?: boolean;
+  }>(),
+  {
+    variant: "primary",
+  }
+);
 </script>
 
 <template>
-  <button @click="onClick" :disabled="disabled">{{ label }}</button>
+  <button @click="onClick" :disabled="disabled" :class="variant">
+    {{ label }}
+  </button>
 </template>
 
 <style scoped>
 button {
-  background-color: #000;
-  color: #fff;
-  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 8px 16px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 button:hover {
-  background-color: #333;
+  background-color: var(--accent-color-hover);
 }
 
 button:active {
-  background-color: #666;
+  background-color: var(--accent-color);
 }
 
 button:disabled {
-  background-color: #888;
+  opacity: 0.5;
   cursor: not-allowed;
+}
+
+button.border {
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+button.border:hover {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+button.border:active {
+  background-color: transparent;
 }
 </style>

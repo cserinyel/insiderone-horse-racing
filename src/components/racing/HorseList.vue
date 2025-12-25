@@ -37,7 +37,7 @@ const horses = computed(() => store.getters["raceStore/horses"]);
 .horse-list-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   width: 400px;
   overflow: hidden;
   border: 1px solid var(--border-color);

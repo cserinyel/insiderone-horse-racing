@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useStore } from "vuex";
+import LapPositionList from "./LapPositionList.vue";
 
 const store = useStore();
 const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
@@ -10,26 +11,14 @@ const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
   <div class="schedule-container">
     <h1 class="schedule-header">Schedule</h1>
     <p v-if="!raceSchedule.length" class="no-schedule">No schedule available</p>
-    <div v-else class="schedule-tables-container">
-      <div v-for="race in raceSchedule" :key="race.id" class="schedule-table">
-        <h2 class="schedule-table-header">
-          {{ race.lapName }} - {{ race.lapDistance }}m
-        </h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Position</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(horse, index) in race.horses" :key="horse.id">
-              <td>{{ Number(index) + 1 }}</td>
-              <td>{{ horse.name }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div v-else class="schedule-list-container">
+      <LapPositionList
+        v-for="race in raceSchedule"
+        :key="race.id"
+        :lapName="race.lapName"
+        :lapDistance="race.lapDistance"
+        :horses="race.horses"
+      />
     </div>
   </div>
 </template>
@@ -38,33 +27,30 @@ const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
 .schedule-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  min-width: 300px;
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 8px;
 }
+
 .schedule-header {
   font-size: 24px;
   font-weight: 600;
   margin: 0;
 }
+
 .no-schedule {
   color: #888;
   font-style: italic;
   margin: 0;
 }
-.schedule-tables-container {
+
+.schedule-list-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   height: 100%;
   overflow-y: auto;
-}
-.schedule-table {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.schedule-table-header {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
 }
 </style>
