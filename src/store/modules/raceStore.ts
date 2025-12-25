@@ -39,6 +39,18 @@ interface RaceState {
 
 interface RootState {}
 
+function resetCommonState(state: RaceState) {
+  clearCountdownInterval();
+  state.raceState = RACE_STATE.IDLE;
+  state.currentLapIndex = -1;
+  state.horsePositions = {};
+  state.finishTimes = {};
+  state.countdownValue = 0;
+  state.raceStartTime = 0;
+  state.lapResults = [];
+  state.isFinishingLap = false;
+}
+
 const raceStore: Module<RaceState, RootState> = {
   namespaced: true,
 
@@ -85,18 +97,15 @@ const raceStore: Module<RaceState, RootState> = {
       state.finishTimes = {};
     },
     RESET_RACE_STATE(state) {
-      clearCountdownInterval();
-      state.raceState = RACE_STATE.IDLE;
-      state.currentLapIndex = -1;
-      state.horsePositions = {};
-      state.finishTimes = {};
-      state.countdownValue = 0;
-      state.raceStartTime = 0;
-      state.lapResults = [];
-      state.isFinishingLap = false;
+      resetCommonState(state);
     },
     SET_IS_FINISHING_LAP(state, value: boolean) {
       state.isFinishingLap = value;
+    },
+    HARD_RESET_RACE_STATE(state) {
+      resetCommonState(state);
+      state.horses = createRandomHorses();
+      state.raceSchedule = [];
     },
   },
 
@@ -308,6 +317,9 @@ const raceStore: Module<RaceState, RootState> = {
         clearCountdownInterval();
         commit("SET_RACE_STATE", RACE_STATE.FINISHED);
       }
+    },
+    hardResetRace({ commit }) {
+      commit("HARD_RESET_RACE_STATE");
     },
   },
 

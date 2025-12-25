@@ -32,6 +32,9 @@ const toggleRace = () => {
     store.dispatch("raceStore/startRace");
   }
 };
+const resetRace = () => {
+  store.dispatch("raceStore/hardResetRace");
+};
 
 const getButtonLabel = computed(() => {
   if (raceState.value === RACE_STATE.PAUSED) {
@@ -62,14 +65,8 @@ const isButtonDisabled = computed(() => {
   <header class="topbar">
     <h1 class="app-title">{{ title }}</h1>
     <div class="race-controls-container">
-      <Button
-        label="Generate Schedule"
-        :onClick="
-          () => {
-            generateRandomRaceSchedule();
-          }
-        "
-      />
+      <Button label="Reset Race" :onClick="resetRace" />
+      <Button label="Generate Schedule" :onClick="generateRandomRaceSchedule" />
       <Button
         :label="getButtonLabel"
         :disabled="isButtonDisabled"
