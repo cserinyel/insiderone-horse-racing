@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useStore } from "vuex";
 import LapPositionList from "./LapPositionList.vue";
-import type { RaceResult, ResultWithLapInfo } from "../../types/race";
+import type { ResultWithLapInfo } from "../../../types/race";
+import { useRaceState } from "../../../composables/useRaceState";
 
-const store = useStore();
-const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
-const lapResults = computed(() => store.getters["raceStore/lapResults"]);
+const { raceSchedule, lapResults } = useRaceState();
 
 const resultsWithLapInfo = computed<ResultWithLapInfo[]>(() => {
-  return lapResults.value.map((results: RaceResult[], index: number) => {
+  return lapResults.value.map((results, index) => {
     const lapInfo = raceSchedule.value[index];
     return {
       lapInfo,
@@ -41,7 +39,7 @@ const resultsWithLapInfo = computed<ResultWithLapInfo[]>(() => {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-width: 300px;
+  min-width: 250px;
   border: 1px solid var(--border-color);
   padding: 8px 16px;
   border-radius: 8px;

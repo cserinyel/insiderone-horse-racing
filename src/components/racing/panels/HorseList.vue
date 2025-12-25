@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "vuex";
-import Pill from "../common/pill/Pill.vue";
+import { useRaceState } from "../../../composables/useRaceState";
 
-const store = useStore();
-const horses = computed(() => store.getters["raceStore/horses"]);
+const { horses } = useRaceState();
 </script>
 
 <template>
@@ -24,7 +21,10 @@ const horses = computed(() => store.getters["raceStore/horses"]);
             <td class="horse-name">{{ horse.name }}</td>
             <td class="horse-condition">{{ horse.condition }}</td>
             <td class="horse-color">
-              <Pill :colorHex="horse.color.hex" :colorName="horse.color.name" />
+              <div
+                class="color-circle"
+                :style="{ backgroundColor: horse.color.hex }"
+              ></div>
             </td>
           </tr>
         </tbody>
@@ -38,8 +38,9 @@ const horses = computed(() => store.getters["raceStore/horses"]);
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 400px;
+  min-width: 350px;
   overflow: hidden;
+  overflow-x: hidden;
   border: 1px solid var(--border-color);
   padding: 8px 16px;
   border-radius: 8px;
@@ -47,6 +48,7 @@ const horses = computed(() => store.getters["raceStore/horses"]);
 .horse-list-table-container {
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .horse-list-table {
   width: 100%;
@@ -82,4 +84,11 @@ const horses = computed(() => store.getters["raceStore/horses"]);
 .horse-list-table tbody tr:nth-child(even) {
   background-color: var(--track-color);
 }
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
 </style>
+

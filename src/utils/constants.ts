@@ -140,7 +140,7 @@ export const RACE_LAP_ITEMS = {
   },
 } as const satisfies Record<string, RaceLapItem>;
 
-export const SPEED_MULTIPLIER = 0.2; // Base speed calculation multiplier (increased for faster races)
+export const SPEED_MULTIPLIER = 0.3; // Base speed calculation multiplier (increased for faster races)
 export const VARIATION_RANGE = 0.15; // Random variation range for speed
 export const UPDATE_INTERVAL_MS = 250; // Position update interval in milliseconds
 export const COUNTDOWN_DURATION = 3; // Countdown seconds before race starts

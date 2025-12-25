@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "vuex";
 import LapPositionList from "./LapPositionList.vue";
+import { useRaceState } from "../../../composables/useRaceState";
 
-const store = useStore();
-const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
+const { raceSchedule } = useRaceState();
 </script>
 
 <template>
@@ -28,7 +26,7 @@ const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-width: 300px;
+  min-width: 250px;
   border: 1px solid var(--border-color);
   padding: 8px 16px;
   border-radius: 8px;
@@ -54,3 +52,4 @@ const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
   overflow-y: auto;
 }
 </style>
+

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import Topbar from "./components/layout/topbar/Topbar.vue";
-import HorseList from "./components/racing/HorseList.vue";
-import Schedule from "./components/racing/Schedule.vue";
-import RaceTrack from "./components/racing/RaceTrack.vue";
-import Results from "./components/racing/Results.vue";
+import { RaceTrack } from "./components/racing/track";
+import { HorseList, Schedule, Results } from "./components/racing/panels";
 </script>
 
 <template>

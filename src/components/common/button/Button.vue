@@ -1,15 +1,9 @@
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    label: string;
-    onClick: () => void;
-    variant?: "primary" | "border";
-    disabled?: boolean;
-  }>(),
-  {
-    variant: "primary",
-  }
-);
+import type { ButtonProps } from "./Button.type";
+
+const props = withDefaults(defineProps<ButtonProps>(), {
+  variant: "primary",
+});
 </script>
 
 <template>

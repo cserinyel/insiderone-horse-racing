@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { Horse } from "../../types/horse";
-import type { RaceResult } from "../../types/race";
+import type { Horse } from "../../../types/horse";
+import type { RaceResult } from "../../../types/race";
 
 interface Props {
   lapName: string;
@@ -98,3 +98,4 @@ const positionItems = computed(() => {
   background-color: var(--track-color);
 }
 </style>
+
