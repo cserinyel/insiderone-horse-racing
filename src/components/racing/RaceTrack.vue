@@ -1,39 +1,56 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useStore } from "vuex";
-import horseSvg from "../../assets/horse.svg";
+import { useRaceState } from "../../composables/useRaceState";
+import { usePositionUpdater } from "../../composables/usePositionUpdater";
+import { useVisibilityPause } from "../../composables/useVisibilityPause";
+import CountdownOverlay from "./CountdownOverlay.vue";
+import HorseLane from "./HorseLane.vue";
+import { RACE_STATE } from "../../types/race";
 
-const store = useStore();
-const currentLap = computed(() => store.getters["raceStore/getCurrentLap"]);
+const {
+  currentLap,
+  raceState,
+  countdownValue,
+  horsePositions,
+  pauseRace,
+  updatePositions,
+} = useRaceState();
+
+usePositionUpdater(raceState, updatePositions);
+useVisibilityPause(pauseRace);
+
+const getPosition = (horseId: string) => horsePositions.value[horseId] || 0;
 </script>
 
 <template>
   <div class="race-track-container">
-    <h1 class="race-track-header">Race Track</h1>
+    <div class="race-track-header-container">
+      <h1 class="race-track-header">Race Track</h1>
+      <p v-if="currentLap" class="race-track-header-text">
+        {{ currentLap.lapName }} - {{ currentLap.lapDistance }}m
+      </p>
+    </div>
+
     <p v-if="!currentLap" class="no-lap">No lap available</p>
+
     <div v-else class="race-track-lap-container">
-      <div class="race-track-lap-horses-container">
-        <div
+      <CountdownOverlay
+        :race-state="raceState"
+        :countdown-value="countdownValue"
+        :lap-name="currentLap.lapName"
+      />
+
+      <div
+        v-if="raceState !== RACE_STATE.FINISHED"
+        class="race-track-lap-horses-container"
+      >
+        <HorseLane
           v-for="(horse, index) in currentLap.horses"
           :key="horse.id"
-          class="race-track-lane-container"
-        >
-          <p class="race-track-lane-number">{{ Number(index) + 1 }}</p>
-          <div class="race-track-lane-horse-container">
-            <div class="race-track-lane-horse">
-              <img
-                :src="horseSvg"
-                alt="Horse"
-                class="race-track-lap-horse-image"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="race-track-lap-progress-container">
-        <p class="race-track-lap-distance">
-          {{ currentLap.lapName }} - {{ currentLap.lapDistance }}m
-        </p>
+          :horse="horse"
+          :lane-number="Number(index) + 1"
+          :position="getPosition(horse.id)"
+          :race-state="raceState"
+        />
       </div>
     </div>
   </div>
@@ -48,44 +65,42 @@ const currentLap = computed(() => store.getters["raceStore/getCurrentLap"]);
   background-color: rgb(65, 65, 65);
   padding: 8px 16px;
   border-radius: 8px;
+  position: relative;
 }
+
+.race-track-header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.race-track-header-text {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
 .race-track-header {
   font-size: 24px;
   font-weight: 600;
   margin: 0;
 }
-.race-track-lap-progress-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+
+.race-track-lap-container {
+  position: relative;
 }
-.race-track-lane-container {
+
+.race-track-lap-horses-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: column;
 }
-.race-track-lane-number {
-  font-size: 16px;
-  font-weight: 600;
+
+.no-lap {
+  color: #888;
+  font-style: italic;
   margin: 0;
-  width: 20px;
-  text-align: center;
-  color: #000;
-  background-color: rgb(255, 178, 78);
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-.race-track-lane-horse-container {
-  display: flex;
-  width: 100%;
-  border-bottom: 1px solid rgb(255, 178, 78);
-}
-.race-track-lap-horse-image {
-  width: 50px;
-  height: 50px;
 }
 </style>

@@ -4,16 +4,32 @@ import { useStore } from "vuex";
 
 const store = useStore();
 const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
+const lapResults = computed(() => store.getters["raceStore/lapResults"]);
+
+const resultsWithLapInfo = computed(() => {
+  return lapResults.value.map((results, index) => {
+    const lapInfo = raceSchedule.value[index];
+    return {
+      lapInfo,
+      results,
+    };
+  });
+});
 </script>
 
 <template>
   <div class="schedule-container">
     <h1 class="schedule-header">Results</h1>
-    <p v-if="!raceSchedule.length" class="no-schedule">No results available</p>
+    <p v-if="!lapResults.length" class="no-schedule">No results available</p>
     <div v-else class="schedule-tables-container">
-      <div v-for="race in raceSchedule" :key="race.id" class="schedule-table">
+      <div
+        v-for="(resultData, index) in resultsWithLapInfo"
+        :key="index"
+        class="schedule-table"
+      >
         <h2 class="schedule-table-header">
-          {{ race.lapName }} - {{ race.lapDistance }}m
+          {{ resultData.lapInfo?.lapName }} -
+          {{ resultData.lapInfo?.lapDistance }}m
         </h2>
         <table>
           <thead>
@@ -23,9 +39,9 @@ const raceSchedule = computed(() => store.getters["raceStore/raceSchedule"]);
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(horse, index) in race.horses" :key="horse.id">
-              <td>{{ Number(index) + 1 }}</td>
-              <td>{{ horse.name }}</td>
+            <tr v-for="result in resultData.results" :key="result.horse.id">
+              <td>{{ result.position }}</td>
+              <td>{{ result.horse.name }}</td>
             </tr>
           </tbody>
         </table>

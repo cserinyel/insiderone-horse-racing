@@ -53,7 +53,7 @@ export const HORSE_NAMES = [
   "Regina Solaris",
   "Equus Mirabilis",
 ];
-export const HORSE_CONDITION_MIN = 1;
+export const HORSE_CONDITION_MIN = 50;
 export const HORSE_CONDITION_MAX = 100;
 
 export const COLORS = [
@@ -122,3 +122,21 @@ export const RACE_LAP_ITEMS: Record<string, RaceLapItem> = {
     lapName: "Sixth Lap",
   },
 };
+
+export const SPEED_MULTIPLIER = 0.3; // Base speed calculation multiplier (increased for faster races)
+export const VARIATION_RANGE = 0.12; // Random variation range for speed (±0.06)
+export const UPDATE_INTERVAL_MS = 250; // Position update interval in milliseconds
+export const COUNTDOWN_DURATION = 3; // Countdown seconds before race starts
+export const LAP_TRANSITION_DELAY_MS = 300; // Delay for CSS transition to complete before showing results
+export const NEXT_LAP_DELAY_MS = 1000; // Delay before starting next lap
+export const COUNTDOWN_INTERVAL_MS = 1000; // Countdown tick interval
+
+// Distance-based racing: base distance for speed normalization
+export const BASE_DISTANCE = 1200; // Base distance in meters (shortest race)
+
+// Race phases: different speed bonuses at different points in the race
+export const RACE_PHASES = {
+  START: { maxPosition: 15, speedBonus: 0.08 }, // First 15%: initial burst off the line
+  CRUISE: { maxPosition: 75, speedBonus: 0 }, // 15-75%: steady pace, conserve energy
+  SPRINT: { maxPosition: 100, speedBonus: 0.12 }, // 75-100%: final sprint to the finish
+} as const;
