@@ -22,7 +22,7 @@ defineProps<{
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--overlay-color);
   display: flex;
   flex-direction: column;
   align-items: center;

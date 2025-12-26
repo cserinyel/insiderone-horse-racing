@@ -2,6 +2,9 @@
 import Topbar from "./components/layout/topbar/Topbar.vue";
 import { RaceTrack } from "./components/racing/track";
 import { HorseList, Schedule, Results } from "./components/racing/panels";
+import { useTheme } from "./composables/useTheme";
+
+useTheme();
 </script>
 
 <template>

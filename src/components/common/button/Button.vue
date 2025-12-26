@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 <style scoped>
 button {
   background-color: var(--accent-color);
-  color: var(--text-color);
+  color: #ffffff;
   padding: 8px 16px;
   border-radius: 5px;
   border: none;
@@ -45,10 +45,11 @@ button.border {
 
 button.border:hover {
   background-color: var(--accent-color);
-  color: var(--text-color);
+  color: #ffffff;
 }
 
 button.border:active {
   background-color: transparent;
+  color: var(--accent-color);
 }
 </style>

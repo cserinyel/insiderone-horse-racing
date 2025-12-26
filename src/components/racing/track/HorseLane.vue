@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import HorseIcon from "../../common/HorseIcon.vue";
+import HorseIcon from "../../common/images/HorseIcon.vue";
 import { RACE_STATE, type RaceState } from "../../../types/race";
 import type { Horse } from "../../../types/horse";
-import { FINISH_LINE_POSITION, INITIAL_POSITION } from "../../../utils/constants";
+import {
+  FINISH_LINE_POSITION,
+  INITIAL_POSITION,
+} from "../../../utils/constants";
 
 const props = defineProps<{
   horse: Horse;
@@ -148,4 +151,3 @@ const isMoving = computed(
   opacity: 0.2;
 }
 </style>
-
