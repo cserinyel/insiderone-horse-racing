@@ -5,11 +5,15 @@ import {
   GenerateScheduleButton,
 } from "../../racing/controls";
 import logoSvg from "../../../assets/logo.svg";
+
+defineProps<{
+  title: string;
+}>();
 </script>
 
 <template>
   <header class="topbar">
-    <img :src="logoSvg" alt="Horse Racing" class="app-logo" />
+    <img :src="logoSvg" :alt="title" class="app-logo" />
     <div class="race-controls-container">
       <ResetRaceButton />
       <GenerateScheduleButton />
