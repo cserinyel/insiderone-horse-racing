@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import Button from "../../common/button/Button.vue";
-import { RACE_STATE } from "../../../types/race";
-import { useRaceState } from "../../../composables/useRaceState";
+import Button from "../../../common/button/Button.vue";
+import { RACE_STATE } from "../../../../types/race";
+import { useRaceState } from "../../../../composables/useRaceState";
 
 const { raceState, isRaceScheduleGenerated, startRace, pauseRace, resumeRace } =
   useRaceState();
