@@ -1,4 +1,4 @@
-import { ref, watch, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 
 export type Theme = "dark" | "light";
 
@@ -41,4 +41,3 @@ export function useTheme() {
     initTheme,
   };
 }
-
